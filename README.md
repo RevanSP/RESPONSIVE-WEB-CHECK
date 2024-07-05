@@ -6,8 +6,6 @@
     <li>CSS</li>
     <li>JAVASCRIPT</li>
     <li>BOOTSTRAP</li>
-    <li>REACT</li>
-    <li>TYPESCRIPT</li>
 </ul>
     <table>
         <tr>
