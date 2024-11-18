@@ -32,7 +32,8 @@
                     </svg>
                     <input type="text" id="urlInput" class="grow" placeholder="some websites can be fetched" />
                 </label>
-                <button class="font-bold btn btn-white border-2 rounded border-black mt-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
+                <button
+                    class="font-bold btn btn-white border-2 rounded border-black mt-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
                     onclick="fetchURL()">SUBMIT</button>
             </div>
             <div class="flex space-x-7">
@@ -77,20 +78,18 @@
                     <form method="dialog">
                         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                     </form>
-                    <div class="container mx-auto">
-                        <div class="mockup-phone">
-                            <div class="camera"></div>
-                            <div class="display">
-                                <div class="artboard artboard-demo phone-1">
-                                    <iframe id="iframeMobile" class="w-full h-full" frameborder="0"></iframe>
-                                </div>
+                    <div class="mockup-phone mt-4">
+                        <div class="camera"></div>
+                        <div class="display">
+                            <div class="artboard artboard-demo phone-1">
+                                <iframe id="iframeMobile" class="w-full h-full" frameborder="0"></iframe>
                             </div>
                         </div>
                     </div>
                 </div>
             </dialog>
             <dialog id="my_modal_2" class="modal">
-                <div class="modal-box w-11/12 max-w-7xl h-full">
+                <div class="modal-box w-11/12 max-w-7xl h-96 lg:h-full">
                     <form method="dialog">
                         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                     </form>
