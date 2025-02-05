@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB TOOLS</title>
+    <link rel="icon" type="image/webp" href="public/favicon.webp">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/style.css">
+</head>
+
+<body class="bg-base-300 h-screen flex justify-center items-center">
+    <dialog id="requirements" class="modal">
+        <div class="modal-box shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] border-2 border-black rounded-none">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <h3 class="text-lg font-bold mb-2">REQUIREMENTS</h3>
+            <p>The site can only be a single page. If you want to add other pages, you can add additional pages. For
+                example, the default is https://example.com, and you can add other pages like
+                https://example.com/project. However, not all websites can be used; it only works for certain websites
+                due to restrictions such as CORS (Cross-Origin Resource Sharing) and other limitations.</p>
+        </div>
+    </dialog>
+    <dialog id="mobileView" class="modal">
+        <div class="modal-box flex items-center justify-center p-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] border-2 border-black rounded-none">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <div class="flex justify-center">
+                <div class="mockup-phone mt-8">
+                    <div class="camera"></div>
+                    <div class="display flex justify-center items-center">
+                        <div class="artboard artboard-demo phone-1 mt-12">
+                            <iframe id="iframeMobile" class="w-full h-full" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+    <dialog id="desktopView" class="modal">
+        <div class="modal-box w-11/12 max-w-full h-96 lg:h-full shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] border-2 border-black rounded-none">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <div class="mockup-window bg-base-300 border mt-6 h-full">
+                <iframe id="iframeDesktop" class="w-full h-full" frameborder="0"></iframe>
+            </div>
+        </div>
+    </dialog>
+    <div class="zoom px-12">
+        <div role="tablist" class="tabs tabs-bordered shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] border-2 border-black">
+            <input type="radio" name="web-tool" role="tab" class="tab" aria-label="RESPONSIVE&nbsp;WEB" checked />
+            <div role="tabpanel" class="tab-content bg-base-100 border-base-300 p-0">
+                <div class="card bg-base-100">
+                    <div class="card-body">
+                        <h2 class="card-title flex justify-center items-center font-bold">RESPONSIVE WEB CHECK</h2>
+                        <div class="join mt-3">
+                            <input type="text" id="urlInput"
+                                class="text-xs bg-base-300 input input-bordered join-item w-full flex items-center gap-2 rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] border-2 border-black"
+                                placeholder="URL ... (some websites can be fetched)" />
+                            <button
+                                class="font-bold btn bg-base-300 border-2 rounded-none border-black  shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] join-item"
+                                onclick="fetchURL()"><i class="bi bi-check2-circle"></i></button>
+                        </div>
+                        <div class="w-full flex join">
+                            <button id="mobileViewBtn"
+                                class="btn bg-base-300 border-2 rounded-none border-black w-1/2  mt-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] btn-disabled join-item"
+                                onclick="showMobileView()">MOBILE VIEW</button>
+                            <button id="desktopViewBtn"
+                                class="btn bg-base-300 border-2 rounded-none border-black w-1/2 mt-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] btn-disabled join-item"
+                                onclick="showDesktopView()">DESKTOP VIEW</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="radio" name="web-tool" role="tab" class="tab" aria-label="DOWNLOADER&nbsp;WEB" />
+            <div role="tabpanel" class="tab-content bg-base-100 border-base-300 p-0">
+                <div class="card bg-base-100">
+                    <div class="card-body">
+                        <h2 class="card-title flex justify-center items-center font-bold">DOWNLOADER WEB</h2>
+                        <div class="join mt-3">
+                            <input type="text" id="urlsInput"
+                                class="text-xs bg-base-300 input input-bordered join-item w-full flex items-center gap-2 rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] border-2 border-black"
+                                placeholder="URL ... (some websites can be fetched)" />
+                                <button
+                                class="font-bold btn bg-base-300 border-2 rounded-none border-black  shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] join-item" onclick="requirements.showModal()">REQUIREMENTS</button>
+                            <button
+                                class="font-bold btn bg-base-300 border-2 rounded-none border-black  shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] join-item" onclick="fetchFiles()"><i class="bi bi-check2-circle"></i></button>
+                        </div>
+                          
+                            <button id="downloadBtn"
+                                class="font-bold btn  border-2 btn-disabled rounded-none bg-base-300 border-black mt-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
+                                onclick="downloadZIP()" disabled>DOWNLOAD ZIP</button>
+                    </div>
+                </div>
+            </div>
+            <input type="radio" name="web-tool" role="tab" class="tab bg-base-200" aria-label="DEV">
+            <div role="tabpanel" class="tab-content bg-base-100 border-base-300 p-6">
+                <div class="card bg-base-100">
+                    <div class="card-body">
+                        <a href="https://www.instagram.com/m9nokuro"
+                            class="btn w-full btn-white border-2 rounded border-black  shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+                            <i class="bi bi-instagram text-xl"></i> @m9nokuro</a>
+                        <a href="https://web.facebook.com/profile.php?id=100082958149027&_rdc=1&_rdr"
+                            class="btn w-full btn-white border-2 rounded border-black mt-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"><i
+                                class="bi bi-facebook text-xl"></i> @Reiivan</a>
+                        <a href="https://github.com/RevanSP"
+                            class="btn w-full btn-white border-2 rounded border-black mt-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"><i
+                                class="bi bi-github text-xl"></i> @RevanSP</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="public/responsive.js"></script>
+    <script src="public/downloader.js"></script>
+</body>
+
+</html>
